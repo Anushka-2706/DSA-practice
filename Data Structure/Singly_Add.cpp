@@ -74,12 +74,71 @@ Node* InsertionAtPos(Node* head, int data, int pos){
     return head;
 }
 
-void display(Node* head) {
-    Node* temp = head;
+//delete a node at first position.
+Node* DelAtHead(Node* head) {
+    if (head == NULL) {
+        cout<< "Empty Linked List" <<endl;
+        return head;
+    }
+    
+    Node* PTR = head;
+    head = head->next;
+    delete PTR;
+    return head;
+}
+//delete a node at last position.
+Node* DelAtTail(Node* head) {
+    if (head == NULL) {
+        cout<< "Empty Linked List" <<endl;
+        return head;
+    }
+    if (head->next == NULL) {
+        delete head;
+        return NULL;
+    }
+    Node* PTR = head;
+    Node* temp = PTR;
+    while (PTR->next != NULL) {
+        temp = PTR;
+        PTR = PTR->next;
+    }
+    temp->next = NULL;
+    delete PTR;
+    return head;
+}
 
-    while (temp != NULL) {
-        cout << temp->data << " ";
-        temp = temp->next;
+//delete a node at specific position.
+Node* DelAtPos(Node* head, int pos) {
+    if (head == NULL) {
+        cout<< "Empty Linked List" <<endl;
+        return head;
+    }
+    if (pos == 1) {
+        Node* PTR = head;
+        head = head->next;
+        delete PTR;
+        return NULL;
+    }
+    int i = 0;
+    Node* PTR = head;
+    Node* temp = PTR;
+
+    while (i < pos-1) {
+        temp = PTR;
+        PTR = PTR->next;
+        i = i+1;
+    }
+    temp->next = PTR->next;
+    delete PTR;
+    return head;
+}
+
+void display(Node* head) {
+    Node* PTR = head;
+
+    while (PTR != NULL) {
+        cout << PTR->data << " ";
+        PTR = PTR->next;
     }
     cout << "NULL" << endl;
 }
@@ -93,16 +152,25 @@ int main() {
 
     head = InsertionAtTail(head, 36);
     head = InsertionAtTail(head, 48);
+    head = InsertionAtTail(head, 62);
+
+    display(head);
+
+    head = DelAtHead(head);
+    display(head);
+
+    head = DelAtTail(head);
+    display(head);
+
+    head = InsertionAtHead(head, 0);
+    display(head);
+
     head = InsertionAtTail(head, 60);
-
     display(head);
 
-    head = InsertionAtPos(head, 56, 2);
+    head = DelAtPos(head, 4);
     display(head);
-
-    head = InsertionAtPos(head, 79, 5);
-    display(head);
-
+    
     return 0;
 
 }
