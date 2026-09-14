@@ -168,6 +168,9 @@ int main() {
     head = InsertionAtTail(head, 60);
     display(head);
 
+    head = InsertionAtPos(head, 43, 4);
+    display(head);
+
     head = DelAtPos(head, 4);
     display(head);
     
