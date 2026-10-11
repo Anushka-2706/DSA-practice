@@ -32,11 +32,24 @@ stack* pop(stack* top) {
     stack* ptr = NULL;
     if (top == NULL) {
         cout<<"stack Underflow"<<endl;
+        return NULL;
     }
     ptr = top;
     top = top->next;
     delete ptr;
     return top;
+}
+
+int peek(stack* top) {
+    if (top == NULL) {
+        cout<<"stack is empty"<<endl;
+        return -1;
+    }
+    return top->data;
+}
+
+bool isEmpty(stack* top) {
+    return top == NULL;
 }
 
 void display(stack* top){
@@ -59,6 +72,9 @@ int main() {
     top = push(top, 60);
 
     display(top);
+    
+    cout<<"top element:"<<peek(top)<<endl;
+
     for (i=0; i<2; i++) {
     top = pop(top);
     }
@@ -68,6 +84,11 @@ int main() {
     top = pop(top);
     }
 
-    display(top);    
+    display(top);
+
+    cout<<"Is stack empty:"<<isEmpty(top)<<endl;
+
+    cout<<"top element:"<<peek(top)<<endl;
+
     return 0;
 }
