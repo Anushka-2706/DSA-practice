@@ -42,6 +42,14 @@ Queue* pop(Queue* front) {
     return front;
 }
 
+int peek(Queue* front) {
+    if (front == NULL) {
+        cout<<"Queue is empty"<<endl;
+        return -1;
+    }
+    return front->data;
+}
+
 void display (Queue* front) {
     Queue* temp = front;
     while (temp) {
@@ -61,10 +69,13 @@ int main() {
     front = push(front, 50);
     
     display(front);
+    cout << "Front element: " << peek(front) << endl;
 
     front = pop (front);
     front = pop (front);
 
     display(front);
+    cout << "Front element: " << peek(front) << endl;
+
     return 0;
 }
